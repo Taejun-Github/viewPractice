@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+       <app-header  v-bind:propsdata="num"></app-header>
+       <app-content v-on:pass="deliverNum" v-bind:propsdata="num"></app-content>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        let appHeader = {
+            template: '<div>Header</div>',
+            props: ['propsdata']
+            //데이터를 받아오려면 이렇게 props 배열을 만든다.
+            //그리고 v-bind에다가 받아올 데이터의 변수에다가 Vue의 data에 정의된 데이터를 대입한다.
+        };
+
+        let appContent = {
+            template: '<div>Content<button v-on:click="passNum">pass</button></div>',
+            methods: {
+                passNum: function() {
+                    this.$emit('pass', 10);
+                    //addContent 컴포넌트의 템플릿에 있는 버튼을 클릭하면 pass라는 이름으로 10이라는 데이터를 보내게 된다.
+                    //그러면 태그에서 그 받아온 pass 데이터를 deliverNum이라는 함수에 대입하게 된다.
+                }
+            },
+            props: ['propsdata']
+            
+        }
+
+        new Vue({
+            el:'#app',
+            components: {
+                'app-header': appHeader,
+                'app-content': appContent
+            },
+            data: {
+                num: 0
+            },
+            methods: {
+                deliverNum: function(value) {
+                    this.num = value;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
