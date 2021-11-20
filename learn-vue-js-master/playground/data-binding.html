@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <p v-bind:id="uuid" v-bind:class="name">{{num}}</p>
+        <p v-bind:id="uuid2">{{doubleNum}}</p>
+        <p v-bind:class="name">test</p>
+        <div  v-if="loading">
+            Loading...
+        </div>
+        <div v-else>
+            test user login
+        </div>
+        <div v-show="loading">
+            test loading
+        </div>
+        <!--if와 show의 차이점은? true인 상태에서는 동일하게 화면에 보이게 된다.
+        false일 때 if는 dom을 아예 제거하는 반면 show는 hidden 속성만 css로 부여하게 된다.-->
+
+        <input type="text" v-model="message">
+        <p>{{message}}</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                num: 10,
+                uuid: 'abc1234',
+                uuid2: 'eee123',
+                name: 'text-blue',
+                loading: true,
+                message: 'mc'
+            },
+            computed: {
+                doubleNum: function() {
+                    return this.num * 2;
+                }
+            }
+        })
+    </script>
+</body>
+</html>
