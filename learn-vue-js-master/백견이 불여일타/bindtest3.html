@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <p v-bind:align="myAlign" v-bind:style="{color: myColor}">우측정렬을 v-bind로 지정</p>
+        <p v-bind:align="myAlign2" v-bind:style="color">가운데정렬을 v-bind로 지정</p>
+        <p v-bind:style="{backgroundColor: myBackColor}">v-bind로 지정</p>
+        <p v-bind:style="{fontSize: mySize}">글자크기 지정</p>
+        <p v-bind:class="myClass">v-bind로 클래스 지정</p>
+        <p v-bind:class="[myClass, darkClass]">v-bind로 복수의 클래스 지정</p>
+
+    </div>
+    <style>
+        .strike-through {
+            text-decoration: line-through;
+        }
+
+        .dark {
+            background-color: gray;
+        }
+    </style>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                myAlign: 'right',
+                myAlign2: 'center',
+                color: {color: 'red'},
+                myColor: 'aqua',
+                myBackColor: '#E08000',
+                mySize: '200%',
+                myClass: 'strike-through',
+                darkClass: 'dark',
+                isON: true
+            }
+        })
+    </script>
+</body>
+</html>

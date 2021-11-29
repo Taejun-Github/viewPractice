@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <p><a v-bind:href="naver">네이버로 연결</a></p>
+        <p><img v-bind:src="image">face2.png 표시</img></p>
+        <p v-bind:align="leftalign">왼쪽 정렬</p>
+        <p v-bind:align="rightalign">오른쪽 정렬</p>
+        <p v-bind:align="centeralign">가운데 정렬</p>
+        <p v-bind:style="style1">스타일1</p>
+        <p v-bind:style="style2">스타일2</p>
+        <p v-bind:class="class1">클래스1</p>
+        <p v-bind:class="[class1, class2]">클래스1</p>
+    </div>
+
+    <style>
+        .blue-underline {
+            background-color: aqua;
+        }
+
+        .strike-through {
+            color: yellow;
+        }
+    </style>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                naver: 'http://www.naver.com',
+                image: 'face2.png',
+                leftalign: 'left',
+                rightalign: 'right',
+                centeralign: 'center',
+                style1: {color: 'red', fontSize:'2em'},
+                style2: {backgroundColor: 'yellow', color: 'red', fontSize: '1.5em'},
+                class1: 'blue-underline',
+                class2: 'strike-through'
+
+            }
+        })
+    </script>
+</body>
+</html>
