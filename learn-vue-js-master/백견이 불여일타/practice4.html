@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>입력폼 활용</h1>
+        <p>이름: <input v-model="name"></p>
+        <p>좋아하는 색은 : </p>
+        <label><input type="radio" value="red" v-model="colour">빨간색</label><br/>
+        <label><input type="radio" value="green" v-model="colour">녹색</label><br/>
+        <label><input type="radio" value="blue" v-model="colour">파란색</label><br/>
+        <label><input type="radio" value="yellow" v-model="colour">노란색</label><br/>
+        <label><input type="radio" value="gray" v-model="colour">회색</label><br/>
+
+
+        내 이름은 {{name}} 이고 좋아하는 색은 {{colour}}입니다.
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                name: '',
+                colour: ''
+            }
+        })
+    </script>
+</body>
+</html>
