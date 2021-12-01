@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="(item, index) in number_list">{{item}} <button v-on:click="changeNumber(index, item)">변경</button>
+                <button v-on:click="deleteNumber(index)">삭제</button></li>
+        </ul>
+        <button v-on:click="addNumber()">추가</button>
+        <button v-on:click="sortNumber(number_list)">정렬</button>
+        <button v-on:click="showGuGu()">구구단 보이기</button>
+        
+        <!-- 틀린 부분. 왜 틀렸을까? if를 먼저 써줘야 한다는 것을 모르고 li v-for 뒤에다가 v-if를 써줬다. 그렇게 하면 제대로 동작하지 않는다.-->
+        <ul v-if="showGuGuList">
+            <li v-for="item in number_list">
+                <p v-for="item2 in 9">{{item}} X {{item2}} = {{item * item2}}</p>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                number_list: [2, 3, 4, 5, 6, 7, 8, 9],
+                showGuGuList : false
+            },
+            methods: {
+                changeNumber: function (index, item) {
+                    // alert(this.number_list[index]);
+                    this.number_list.splice(index, 1, item + 1);
+                },
+                deleteNumber: function(index) {
+                    this.number_list.splice(index, 1);
+                },
+                addNumber: function() {
+                    this.number_list.push(1);
+                },
+                sortNumber: function(number_list) {
+                    number_list.sort(function(a, b) {
+                        return (a < b ? 1 : -1);
+                    });
+                },
+                showGuGu: function() {
+                    this.showGuGuList = !this.showGuGuList;
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

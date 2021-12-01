@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <p>앞으로 {{restSec}}초</p>
+        <button v-on:click="startTimer">START</button>
+        <button v-on:click="setTimer">초기화</button>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                restSec: 5,
+                timerObj: null
+            },
+            methods: {
+                startTimer: function() {
+                    this.restSec = 5;
+                    this.timerObj = setInterval(()=>{this.restSec--}, 1000)
+                },
+                setTimer: function() {
+                    this.restSec = 5;
+                }
+            },
+            watch: {
+                restSec: function(){
+                    if(this.restSec <= 0) {
+                        alert("시간제한입니다");
+                        // this.restSec = 5;
+                        clearInterval(this.timerObj);
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

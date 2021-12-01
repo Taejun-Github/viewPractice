@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>Google Charts로 원그래프를 그리는 예제</h2>
+    <h3>선호하는 점심 메뉴 투표</h3>
+    <div id="chart_div" style="height: 500px;"></div>
+    <div id="app">
+        <li v-for="(item, c) in dataArray" v-if="c > 0">{{item[0]}} : {{item[1]}}
+            <button v-on:click="addOne(c)">한표</button>
+            <button v-on:click="subtractOne(c)">빼기한표</button>
+        </li>
+    </div>
+
+    <script>
+        let orgdata = [
+            ['종류', '개수'], ['도시락', 3], ['갈비탕', 4], ['오므라이스', 5], ['짬뽕', 1], ['비빔밥', 3], ['메밀소바', 1]
+        ];
+
+        google.charts.load('current', { packages: ['corechart'] });
+        google.charts.setOnLoadCallback(drawBasic);
+
+        function drawBasic() {
+            let data = google.visualization.arrayToDataTable(orgdata);
+            let options = { title: '선호하는 점심', "is3D": true };
+            let chart = new google.visualization.BarChart(
+                document.getElementById('chart_div')
+            );
+            chart.draw(data, options);
+        }
+        new Vue({
+            el: '#app',
+            data: {
+                dataArray: orgdata
+            },
+            methods: {
+                addOne: function(val) {
+                    let obj = this.dataArray[val];
+                    obj[1]++; // 점심 투표수가 해당 배열의 1 인덱스에 들어가 있다.
+                    this.dataArray.splice(val, 1, obj); // 해당 인덱스의 데이터를 변경한다.
+                    drawBasic(); // 그래프를 다시 그린다.
+                },
+                subtractOne: function(val) {
+                    let obj = this.dataArray[val];
+                    obj[1]--; // 점심 투표수가 해당 배열의 1 인덱스에 들어가 있다.
+                    this.dataArray.splice(val, 1, obj); // 해당 인덱스의 데이터를 변경한다.
+                    drawBasic(); // 그래프를 다시 그린다
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
