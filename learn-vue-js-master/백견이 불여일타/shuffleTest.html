@@ -8,17 +8,31 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="app">
-        
-    </div>
+    <h2>클릭하면 셔플하는 예제</h2>
+    <button onclick="shuffleData()">셔플</button>
 
     <script>
-        new Vue({
-            el: '#app',
-            data: {
-                
+        let dataArray = ['one', 'two', 'three', 'four', 'five'];
+        function shuffleData() {
+            let buffer = [];
+            let len = this.dataArray.length;
+
+            for(let i=len; len>0; len--) {
+                let r = Math.floor(Math.randon() * len);
+                // 길이 내에서 랜덤으로 인덱스를 하나 뽑는다.
+
+                buffer.push(this.dataArray[r]);
+                // 원본 배열에서 랜덤으로 하나씩 뽑아서 임시 배열에 추가한다.
+
+                this.dataArray.splice(r, 1);
+                // 원본 배열에서 해당 인덱스의 요소를 제거한다.
             }
-        })
+
+            this.dataArray = buffer;
+            //임시 배열을 원본 배열에 입력한다.
+
+            console.log(dataArray);
+        }
     </script>
 </body>
 </html>
