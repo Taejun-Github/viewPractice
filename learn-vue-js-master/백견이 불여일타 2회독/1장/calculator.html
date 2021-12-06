@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        td {
+            padding: 5px 10px;
+            text-align: center;
+        }
+        input {
+            text-align: right;
+            border: none;
+        }
+        input:focus {
+            outline: none;
+        }
+    </style>
+
+    <div id="app">
+        <table border="1">
+            <tr>
+                <td colspan="4">
+                    <input type="text" value="계산기">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <input type="text"> {{numArray}}  {{resultValue}}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" v-on:click="clear">AC</td>
+                <td v-on:click="write('/')">/</td>
+            </tr>
+            <tr>
+                <td v-on:click="write(7)">7</td>
+                <td v-on:click="write(8)">8</td>
+                <td v-on:click="write(9)">9</td>
+                <td v-on:click="write('*')">*</td>
+            </tr>
+            <tr>
+                <td v-on:click="write(4)">4</td>
+                <td v-on:click="write(5)">5</td>
+                <td v-on:click="write(6)">6</td>
+                <td v-on:click="write('-')">-</td>
+            </tr>
+            <tr>
+                <td v-on:click="write(1)">1</td>
+                <td v-on:click="write(2)">2</td>
+                <td v-on:click="write(3)">3</td>
+                <td v-on:click="write('+')">+</td>
+            </tr>
+            <tr>
+                <td colspan="2" v-on:click="write(0)">0</td>
+                <td v-on:click="write('.')">.</td>
+                <td v-on:click="resultReturn">=</td>
+            </tr>
+        </table>
+
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                numArray: '',
+                resultValue: '',
+                operator: '+-*/.',
+                isFirstOp: true
+            },
+            methods: {
+                
+                resultReturn: function() {
+                    this.resultValue = eval(this.numArray);
+                    //이것보다 더 좋은 방법이 있을 것 같다.
+                    this.numArray = this.resultValue + '';
+                    this.resultValue = '';
+                    this.isFirstOp = false;
+                },
+                clear: function() {
+                    this.numArray = '';
+                    this.resultValue = '';
+
+                },
+                write: function(num) {
+                    this.resultValue = '';
+                    this.numArray += num;
+                }
+            },
+            watch: {
+                numArray: function() {
+                    if(this.numArray[0] === 0 && this.isFirstOp == true) {
+                        alert('첫 글자에 0이 올 수 없습니다');
+                        this.numArray = '';
+                    } else if(this.operator.indexOf(this.numArray[0]) !== -1 && this.isFirstOp == true) {
+                        alert('첫 글자에는 숫자만 와야 합니다.');
+                        this.numArray = '';
+                    }
+                    for(let i=0; i<this.numArray.length; i++) {
+                        if(this.operator.indexOf(this.numArray[i]) !== -1
+                        && this.operator.indexOf(this.numArray[i+1]) !== -1) {
+                            alert('연산자는 연속해서 올 수 없습니다.');
+                            this.numArray = '';
+                        }
+                    }
+                    for(let i=0; i<this.numArray.length; i++) {
+                        if(this.numArray[i] == '/' && this.numArray[i+1] == 0) {
+                            alert('0으로 나눌 수 없습니다');
+                            this.numArray = '';
+                        }
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
