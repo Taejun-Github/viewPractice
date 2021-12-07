@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>숫자 배열 조작과 구구단 출력</h1>
+        <ul>
+            <li v-for="(item, index) in myArray">{{item}}<button v-on:click="changeElement(index)">변경</button><button v-on:click="deleteElement(index)">삭제</button></li>
+        </ul>
+        <button v-on:click="addElement">추가</button><button v-on:click="sortElement">소트</button><button v-on:click="showGugu">구구단 보이기</button>
+
+        <ul v-for="item in myArray" v-if="isShow">
+            <li v-for="item2 in 10">{{item}} X {{item2}} = {{item * item2}}</li>
+        </ul>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+               myArray: [2,6,7,8,13],
+               isShow: false
+            },
+            methods: {
+                changeElement: function(index) {     
+                    this.myArray.splice(index, 1, this.myArray[index] + 1);
+                },
+                deleteElement: function(index) {
+                    this.myArray.splice(index, 1);
+                },
+                addElement: function() {
+                    this.myArray.push(1);
+                },
+                sortElement: function() {
+                    this.myArray.sort(function(a, b) {
+                        return (a < b ? -1 : 1);
+                    });
+                },
+                showGugu: function() {
+                    this.isShow = !this.isShow
+                
+                }
+            }
+        })
+    </script>
+</body>
+</html>

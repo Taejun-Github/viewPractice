@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <p style="color: #E80;">문자색 직접 지정</p>
+        <p v-bind:style={color: myColor}>문자색을 v-bind로 지정</p>
+        <p style="font-size: 200%">폰트 크기 직접 지정</p>
+        <p v-bind:style={font: myFont}>폰트 크기를 v-bind로 지정</p>
+        <p v-bind:style={backgroundColor: backColor}>배경색 지정</p>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                myColor: '#E80',
+                myFont: '200%',
+                backColor: 'aqua'
+            }
+        })
+    </script>
+</body>
+</html>
