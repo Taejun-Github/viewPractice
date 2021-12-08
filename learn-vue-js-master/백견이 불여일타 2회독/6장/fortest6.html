@@ -19,11 +19,12 @@
         new Vue({
             el: '#app',
             data: {
-                myArray: ['one','two','three','four','five']
+                myArray: ['1','2','3','4','5']
             },
             methods: {
-                sortData: function(listdata) {
-                    listdata.sort(function(a, b) {
+                sortData: function(listData) {
+                    listData.sort(function(a,b) {
+
                         return (a < b ? -1 : 1);
                     });
                 }

@@ -10,7 +10,8 @@
 <body>
     <div id="app">
         <label><input type="checkbox" v-model="myVisible">표시</label>
-        <p v-if="myVisible">체크박스가 on</p>
+        <button v-bind:disabled="myVisible">버튼</button>
+        <p v-if="myVisible">체크박스가 ON</p>
     </div>
 
     <script>

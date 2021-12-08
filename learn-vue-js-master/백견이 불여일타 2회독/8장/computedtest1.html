@@ -9,16 +9,20 @@
 </head>
 <body>
     <div id="app">
-        <ul>
-            <li v-for="item in myArray">{{item}}</li>
-        </ul>
+        <input v-model.number="price" type="number">원
+        <p>소비세 포함 금액 {{taxIncluded}} 원</p>
     </div>
 
     <script>
         new Vue({
             el: '#app',
             data: {
-                myArray: ['a','b','c']
+                price: 100
+            },
+            computed: {
+                taxIncluded: function() {
+                    return this.price * 1.08;
+                }
             }
         })
     </script>

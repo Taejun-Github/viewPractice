@@ -12,30 +12,30 @@
         <ul>
             <li v-for="item in myArray">{{item}}</li>
         </ul>
-        <button v-on:click="addLast">맨 뒤에 추가</button><br/>
-        <button v-on:click="addObj(3)">네번째에 추가</button><br/>
-        <button v-on:click="changeObj(0)">첫번째를 변경</button><br/>
-        <button v-on:click="deleteObj(1)">두번째를 삭제</button><br/>
+        <button v-on:click="addLast">맨 뒤에 추가</button>
+        <button v-on:click="addObj(3)">네번째에 추가</button>
+        <button v-on:click="changeObj(0)">첫번째를 변경</button>
+        <button v-on:click="deleteObj(1)">두번째를 삭제</button>
     </div>
 
     <script>
         new Vue({
             el: '#app',
             data: {
-                myArray: ['1','2','3','4','5','6','7']
+                myArray: [1,2,3,4,5,6,7,8,9]
             },
             methods: {
                 addLast: function() {
-                    this.myArray.push('123');
+                    this.myArray.push('추가');
                 },
                 addObj: function(num) {
-                    this.myArray.splice(index, 0, '12345');
+                    this.myArray.splice(num, 0, 'add');
                 },
                 changeObj: function(num) {
-                    this.myArray.splice(index, 1, '4545');
+                    this.myArray.splice(num, 1, 'change');
                 },
-                deleteObj: function(num) {  
-                    this.myArray.splice(index, 1);
+                deleteObj: function(num) {
+                    this.myArray.splice(num, 1);
                 }
             }
         })

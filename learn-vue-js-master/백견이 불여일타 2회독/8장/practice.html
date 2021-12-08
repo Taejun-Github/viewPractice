@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>제한 시간내에 문자 입력하기</h1>
+    <div id="app">
+        금지문자: <input type="text" v-model="forbiddenWord" v-bind:disabled="!isWritable"><br />
+        제한시간: <input type="number" v-model.number="time" v-bind:disabled="!isWritable">
+        <button v-on:click="start">시작</button><br />
+
+        남은시간 {{remain}}초 <br />
+        <textarea v-model="inputText" v-bind:disabled="isWritable"></textarea><br />
+        <p v-if="isResult">{{textLength}} 개의 문자를 입력하였습니다.</p>
+        <p v-if="isResult">{{resultScore}} (금지문자 1개당 12점)</p>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                remain: 0,
+                forbiddenWord: '',
+                time: '',
+                inputText: '',
+                timerObj: null,
+                isWritable: true,
+                penalty: 0,
+                isResult: false
+            },
+            computed: {
+                textLength: function() {
+                    return this.inputText.length;
+                },
+                forbiddenWordArray: function() {
+                    return this.forbiddenWord.split(',');
+                },
+                resultScore: function() {
+                    return this.penalty * 12;
+                }
+
+            },
+            methods: {
+                start: function() {
+                    this.remain = this.time;
+                    this.isWritable = !this.isWritable;
+                    this.timerObj = setInterval(()=>{ this.remain--;}, 1000);
+                    alert(this.forbiddenWordArray);
+                },
+
+            },
+            watch: {
+                remain: function() {
+                    if(this.remain <= 0) {
+                        clearInterval(this.timerObj);
+                        this.isWritable = !this.isWritable;
+                        this.isResult = !this.isResult;
+                    }
+                },
+                inputText: function() {
+                    for(let i=0; i<this.forbiddenWordArray.length; i++) {
+                        let pos = this.inputText.indexOf(this.forbiddenWordArray[i]);
+                        if(pos >= 0) {
+                            ++this.penalty;
+                            alert('금지문자 입력');
+                            this.inputText = this.inputText.substr(0, pos);
+                            this.remain += 10;
+                        }
+                    }
+                }
+
+            }
+        })
+    </script>
+</body>
+
+</html>
