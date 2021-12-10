@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <my-component></my-component>
+        <my-component></my-component>
+        <my-component></my-component>
+    </div>
+
+    <script>
+        let MyComponent = {
+            template: '<p class="my-comp">Hello</p>'
+        }
+        new Vue({
+            el: '#app',
+            data: {
+                components: {
+                    'my-component': MyComponent
+                    //컴포넌트의 오브젝트명은 JS에 해당하므로 파스칼 케이스로 쓰고 컴포넌트의 태그명은 케밥케이스로 쓴다.
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
